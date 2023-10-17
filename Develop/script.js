@@ -1,49 +1,51 @@
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// in the HTML.
 $(function () { 
-    let currentHour = dayjs().hour()
+    // Get the current hour using the Day.js library
+    let currentHour = dayjs().hour();
+
+    // Iterate through hours from 9 AM (9) to 5 PM (17)
     for (let index = 9; index < 18; index++) {
-        let parentId = $("#hour-"+index)
-        parentId.children("textarea").val(localStorage.getItem("hour-"+index))
-        if(currentHour === index){
-            parentId.children("textarea").addClass("present")
+        // Select the parent element with an ID like "hour-X"
+        let parentId = $("#hour-" + index);
+
+        // Set the text area's value to the saved value in local storage
+        parentId.children("textarea").val(localStorage.getItem("hour-" + index));
+
+        // Add a class to the text area to indicate past, present, or future
+        if (currentHour === index) {
+            parentId.children("textarea").addClass("present");
         }
-        else if(currentHour > index){
-            parentId.children("textarea").addClass("past")
+        else if (currentHour > index) {
+            parentId.children("textarea").addClass("past");
         }
-        else if(currentHour < index){
-            parentId.children("textarea").addClass("future")
+        else if (currentHour < index) {
+            parentId.children("textarea").addClass("future");
         }
     }
 
-    let saveBtn = $(".saveBtn")
-    //saveBtn.on("click", saveButton)
+    // Select all elements with the class "saveBtn"
+    let saveBtn = $(".saveBtn");
+
+    // Function to handle the save button click event
     function saveButton(event) {
-        console.log($(event.target).parent().siblings("textarea").val())
-        let textarea = $(event.target).siblings("textarea")
-        let parentId = $(event.target).parent().attr("id")
-        localStorage.setItem(parentId, textarea.val())
-    }
-    saveBtn.on("click", saveButton)
+        // Log the value of the sibling text area
+        console.log($(event.target).parent().siblings("textarea").val());
 
-    // TODO: Add a listener for click events on the save button. This code should
-    // use the id in the containing time-block as a key to save the user input in
-    // local storage. HINT: What does `this` reference in the click listener
-    // function? How can DOM traversal be used to get the "hour-x" id of the
-    // time-block containing the button that was clicked? How might the id be
-    // useful when saving the description in local storage?
-    //
-    // TODO: Add code to apply the past, present, or future class to each time
-    // block by comparing the id to the current hour. HINTS: How can the id
-    // attribute of each time-block be used to conditionally add or remove the
-    // past, present, and future classes? How can Day.js be used to get the
-    // current hour in 24-hour time?
-    //
-    // TODO: Add code to get any user input that was saved in localStorage and set
-    // the values of the corresponding textarea elements. HINT: How can the id
-    // attribute of each time-block be used to do this?
-    //
-    // TODO: Add code to display the current date in the header of the page.
-  });
+        // Select the text area associated with the clicked save button
+        let textarea = $(event.target).siblings("textarea");
+
+        // Get the ID of the parent element, which represents the hour
+        let parentId = $(event.target).parent().attr("id");
+
+        // Save the text area's value in local storage using the hour as the key
+        localStorage.setItem(parentId, textarea.val());
+    }
+
+    // Add a click event listener to all save buttons
+    saveBtn.on("click", saveButton);
+});
+
   
