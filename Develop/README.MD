@@ -38,3 +38,8 @@ jQuery: jQuery is used to interact with the Document Object Model (DOM) and add 
 
 Code Implementation
 The JavaScript code for this application wraps all DOM interactions to ensure that the code is executed only after the browser has finished rendering all the elements. It retrieves, displays, and saves tasks using local storage. The time-blocks' classes are dynamically updated based on the current time to provide a visual cue for past, present, and future tasks.
+
+
+Picture of deployed website. 
+
+(https://github.com/Srgowen/Schedular/assets/119532973/ea5aa5e9-2c55-4d9b-971c-7c0418838f89) 
